@@ -1,6 +1,6 @@
 const {execSync} = require('child_process')
 
-const inputPreferences = ['USB AUDIO  CODEC', 'MacBook Pro Microphone']
+const inputPreferences = ['USB AUDIO CODEC', 'MacBook Pro Microphone']
 
 const outputPreferences = [
   'OWC Thunderbolt 3 Audio Device',

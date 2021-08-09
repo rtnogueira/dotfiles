@@ -34,14 +34,6 @@ newRandomEmoji () {
 
 newRandomEmoji
 
-alias jestify="PS1=\"🃏\"$'\n'\"$ \"";
-alias testinglibify="PS1=\"🐙\"$'\n'\"$ \"";
-alias cypressify="PS1=\"🌀\"$'\n'\"$ \"";
-alias staticify="PS1=\"🚀\"$'\n'\"$ \"";
-alias nodeify="PS1=\"💥\"$'\n'\"$ \"";
-alias reactify="PS1=\"⚛️\"$'\n'\"$ \"";
-alias harryify="PS1=\"🧙‍\"$'\n'\"$ \"";
-
 # allow substitution in PS1
 setopt promptsubst
 
@@ -66,16 +58,14 @@ setopt HIST_IGNORE_DUPS
 PATH="/usr/local/bin:$PATH:./node_modules/.bin";
 
 ## Yarn
-# PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-alias yarn="echo update the PATH in ~/.zshrc"
+PATH="$PATH:/opt/yarn-[version]/binPATH="$PATH:/opt/yarn-[version]/bin
+# alias yarn="echo update the PATH in ~/.c"
 
 # Custom bins
 PATH="$PATH:$HOME/.bin";
-# dotfile bins
-PATH="$PATH:$HOME/.my_bin";
 
 # CDPATH ALTERATIONS
-CDPATH=.:$HOME:$HOME/code:$HOME/code/epic-react:$HOME/code/testingjavascript:$HOME/Desktop
+CDPATH=.:$HOME:$HOME/Documents/repos:$HOME/Desktop
 # CDPATH=($HOME $HOME/code $HOME/Desktop)
 
 # disable https://scarf.sh/
@@ -92,11 +82,10 @@ alias vz="vim ~/.zshrc";
 alias cz="code ~/.zshrc";
 alias sz="source ~/.zshrc";
 alias de="cd ~/Desktop";
-alias d="cd ~/code";
+alias d="cd ~/Documents/sssrepos";
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 alias deleteDSFiles="find . -name '.DS_Store' -type f -delete"
-alias kcd-oss="npx -p yo -p generator-kcd-oss -c 'yo kcd-oss'";
 function crapp { cp -R ~/.crapp "$@"; }
 function mcrapp { cp -R ~/.mcrapp "$@"; }
 alias npm-update="npx ncu --dep prod --dep dev --upgrade";
@@ -106,12 +95,13 @@ alias dont_index_node_modules='find . -type d -name "node_modules" -exec touch "
 
 ## git aliases
 function gc { git commit -m "$@"; }
-alias gs="git status";
+alias gst="git status";
 alias gp="git pull";
 alias gf="git fetch";
 alias gpush="git push";
 alias gd="git diff";
 alias ga="git add .";
+alias ghist="log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short";
 dif() { git diff --color --no-index "$1" "$2" | diff-so-fancy; }
 cdiff() { code --diff "$1" "$2"; }
 
@@ -142,7 +132,6 @@ alias git=hub
 
 # Custom functions
 mg () { mkdir "$@" && cd "$@" || exit; }
-shorten() { node ~/code/kcd.im/node_modules/.bin/netlify-shortener "$1" "$2"; }
 cdl() { cd "$@" && ll; }
 npm-latest() { npm info "$1" | grep latest; }
 killport() { lsof -i tcp:"$*" | awk 'NR!=1 {print $2}' | xargs kill -9 ;}
