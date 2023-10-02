@@ -29,43 +29,51 @@ echo "installing homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "brew installing stuff"
-# hub: a github-specific version of git
+# git
 # ripgrep: rg is faster than alternatives
 # tree: really handy for listing out directories in text
 # bat: A cat(1) clone with syntax highlighting and Git integration.
 brew install git ripgrep tree bat
 
-echo "installing node (via n-install)"
-curl -L https://git.io/n-install | bash
+echo "install nvm" 
+brew install nvm 
+
+echo "install node lts via nvm"
+nvm install node
 
 echo "node --version: $(node --version)"
 echo "npm --version: $(npm --version)"
 
-echo "installing yarn"
-curl -o- -L https://yarnpkg.com/install.sh | bash
+# echo "installing yarn"
+# curl -o- -L https://yarnpkg.com/install.sh | bash
+
+echo "installing pnpm"
+brew install pnpm
 
 echo "installing apps with brew cask"
-brew install --cask google-chrome firefox \
-visual-studio visual-studio-code \
-google-drive itsycal workflowy \
+brew install --cask google-chrome \
+visual-studio-code \
+google-drive itsycal \
 figma \
-whatsapp slack zoom discord bluejeans \
-spotify vlc \
+whatsapp slack \
+spotify \
 betterzip sip \
 qlmarkdown qlstephen quicklook-json webpquicklook \
-suspicious-package qlvideo focus dropbox qmoji 
+suspicious-package qlvideo focus qmoji 
 
 echo "add vim plugins"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "cloning dotfiles"
-git clone git@github.com:rtnogueira/dotfiles.git "${HOME}/dotfiles"
-ln -s "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
-ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
-ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
-ln -s "${HOME}/dotfiles/.vimrc" "${HOME}/.vimrc"
-ln -s "${HOME}/dotfiles/.vimrc-parts" "${HOME}/.vimrc-parts"
+git clone git@github.com:rtnogueira/dotfiles.git "${HOME}/code/personal/dotfiles"
+ln -s "${HOME}/code/personal/dotfiles/.zshrc" "${HOME}/.zshrc"
+ln -s "${HOME}/code/personal/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
+ln -s "${HOME}/code/personal/dotfiles/.gitconfig" "${HOME}/.gitconfig"
+ln -s "${HOME}/code/personal/dotfiles/.gitconfig-professional" "${HOME}/.gitconfig-professional"
+ln -s "${HOME}/code/personal/dotfiles/.gitconfig-personal" "${HOME}/.gitconfig-personal"
+ln -s "${HOME}/code/personal/dotfiles/.vimrc" "${HOME}/.vimrc"
+ln -s "${HOME}/code/personal/dotfiles/.vimrc-parts" "${HOME}/.vimrc-parts"
 
 # get bat all configured
 mkdir -p "${HOME}/.config/bat/themes"
@@ -83,16 +91,16 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-#sudo scutil --set ComputerName "0x6D746873"
-#sudo scutil --set HostName "0x6D746873"
-#sudo scutil --set LocalHostName "0x6D746873"
-#sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
+# sudo scutil --set ComputerName "0x6D746873"
+# sudo scutil --set HostName "0x6D746873"
+# sudo scutil --set LocalHostName "0x6D746873"
+# sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
 # Set standby delay to 24 hours (default is 1 hour)
-#sudo pmset -a standbydelay 86400
+# sudo pmset -a standbydelay 86400
 
 # Disable the sound effects on boot
-#sudo nvram SystemAudioVolume=" "
+sudo nvram SystemAudioVolume=" "
 
 # Disable transparency in the menu bar and elsewhere on Yosemite
 # defaults write com.apple.universalaccess reduceTransparency -bool true
@@ -112,7 +120,7 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
-#defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
+# defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
 
 # Increase window resize speed for Cocoa applications
 # defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
@@ -216,8 +224,8 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 #defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 # enable three finger drag on trackpad
-#defaults write http://com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
-#defaults write http://com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+# defaults write http://com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+# defaults write http://com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
 
 # Trackpad: map bottom right corner to right-click
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
@@ -233,11 +241,11 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
-#defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
+# defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
-#defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-#defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+# defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+# defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 # Follow the keyboard focus while zoomed in
 # defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
@@ -270,8 +278,8 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 50
 ###############################################################################
 
 # Require password immediately after sleep or screen saver begins
-#defaults write com.apple.screensaver askForPassword -int 1
-#defaults write com.apple.screensaver askForPasswordDelay -int 0
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "${HOME}/Desktop"
@@ -284,10 +292,10 @@ defaults write com.apple.screencapture type -string "png"
 
 # Enable subpixel font rendering on non-Apple LCDs
 # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
-#defaults write NSGlobalDomain AppleFontSmoothing -int 1
+# defaults write NSGlobalDomain AppleFontSmoothing -int 1
 
 # Enable HiDPI display modes (requires restart)
-#sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+# sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
 # Finder                                                                      #
@@ -311,7 +319,7 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+# defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true

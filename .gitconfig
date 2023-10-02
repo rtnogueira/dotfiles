@@ -1,7 +1,7 @@
-[user]
-  name = Tiago Nogueira
-  email = me+rubentiagonogueira@gmail.com
-
+[includeIf "gitdir:~/code/personal/dotfiles/"]
+  	path = ~/.gitconfig-personal
+[includeIf "gitdir:~/code/professional/"]
+  	path = ~/.gitconfig-professional
 [pull]
   rebase = true
 [branch]
@@ -21,7 +21,7 @@
   default = current
 [core]
   editor = code --wait
-	excludesfile = /Users/tiago.nogueira/.gitignore_global
+	excludesfile = /Users/ruben.nogueira/.gitignore_global
 [color]
 	ui = true
 [color "diff-highlight"]
